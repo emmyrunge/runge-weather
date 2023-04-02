@@ -1,50 +1,15 @@
+
 package runge.weather;
+public class Sys {
 
-public class Sys
-{
-    private int type;
-    private int id;
-    private String country;
-    private int sunrise;
-    private int sunset;
+    private String pod;
 
-    public int getType() {
-        return type;
+    public String getPod() {
+        return pod;
     }
 
-    public void setType(int input) {
-        this.type = input;
+    public void setPod(String pod) {
+        this.pod = pod;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int input) {
-        this.id = input;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String input) {
-        this.country = input;
-    }
-
-    public int getSunrise() {
-        return sunrise;
-    }
-
-    public void setSunrise(int input) {
-        this.sunrise = input;
-    }
-
-    public int getSunset() {
-        return sunset;
-    }
-
-    public void setSunset(int input) {
-        this.sunset = input;
-    }
 }

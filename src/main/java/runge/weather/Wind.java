@@ -1,23 +1,35 @@
+
 package runge.weather;
 
-public class Wind
-{
-    private double speed;
-    private double deg;
 
-    public double getSpeed() {
-        return speed;
-    }
+public class Wind {
 
-    public void setSpeed(int input) {
-        this.speed = input;
-    }
+    private Long deg;
+    private Double gust;
+    private Double speed;
 
-    public double getDeg() {
+    public Long getDeg() {
         return deg;
     }
 
-    public void setDeg(int input) {
-        this.deg = input;
+    public void setDeg(Long deg) {
+        this.deg = deg;
     }
+
+    public Double getGust() {
+        return gust;
+    }
+
+    public void setGust(Double gust) {
+        this.gust = gust;
+    }
+
+    public Double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Double speed) {
+        this.speed = speed;
+    }
+
 }

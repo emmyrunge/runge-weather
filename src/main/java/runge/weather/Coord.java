@@ -1,23 +1,26 @@
+
 package runge.weather;
 
-public class Coord
-{
-    private double lon;
-    private double lat;
 
-    public double getLon() {
-        return lon;
-    }
+public class Coord {
 
-    public void setLon(int input) {
-        this.lon = input;
-    }
+    private Double lat;
+    private Double lon;
 
-    public double getLat() {
+    public Double getLat() {
         return lat;
     }
 
-    public void setLat(int input) {
-        this.lat = input;
+    public void setLat(Double lat) {
+        this.lat = lat;
     }
+
+    public Double getLon() {
+        return lon;
+    }
+
+    public void setLon(Double lon) {
+        this.lon = lon;
+    }
+
 }
