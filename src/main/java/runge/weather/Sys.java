@@ -1,6 +1,8 @@
 
 package runge.weather;
-public class Sys {
+
+public class Sys
+{
 
     private String pod;
 
