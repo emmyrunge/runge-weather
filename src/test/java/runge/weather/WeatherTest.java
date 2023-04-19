@@ -1,10 +1,9 @@
+package runge.weather;
+
 import org.junit.jupiter.api.Test;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import runge.weather.CurrentWeather;
-import runge.weather.FiveDayForecast;
-import runge.weather.WeatherService;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
