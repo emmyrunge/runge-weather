@@ -5,8 +5,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class WeatherTest
 {
@@ -49,8 +48,7 @@ public class WeatherTest
 
         //then
         assertNotNull(fiveDayForecast);
-        assertNotNull(fiveDayForecast.getCity().getPopulation());
-        assertTrue(fiveDayForecast.getCity().getPopulation() > 0);
+        assertEquals(fiveDayForecast.getCity().getPopulation(), 8175133);
 
     }
 }
