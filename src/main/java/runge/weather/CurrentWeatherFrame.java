@@ -1,5 +1,7 @@
 package runge.weather;
 
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -9,22 +11,11 @@ import java.awt.*;
 
 public class CurrentWeatherFrame extends JFrame
 {
-    public CurrentWeatherFrame()
-    {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.openweathermap.org/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .build();
-        WeatherService weatherService = retrofit.create(WeatherService.class);
-        FiveDayForecast fiveDayForecast = weatherService.getFiveDayForecast("New York").blockingFirst();
+    CurrentWeatherView currentWeatherView;
+    WeatherService weatherService;
 
-        CurrentWeatherView currentWeatherView = new CurrentWeatherView(fiveDayForecast);
-        currentWeatherView.setFiveDayForecast(fiveDayForecast);
-
-
-
-        setSize(780,500);
+    public CurrentWeatherFrame() {
+        setSize(780, 500);
         setTitle("Current Weather");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -32,23 +23,52 @@ public class CurrentWeatherFrame extends JFrame
         mainPanel.setLayout(new BorderLayout());
 
         JPanel northPanel = new JPanel(new BorderLayout());
+
+        //BUG: button only pops up after it is clicked...
         JButton updateButton = new JButton("Update");
         northPanel.add(updateButton, BorderLayout.EAST);
 
-        JTextField enterCityField = new JTextField("Enter City, current weather shown is for New York");
+        JTextField enterCityField = new JTextField("Enter City");
         northPanel.add(enterCityField);
+
+        mainPanel.add(northPanel, BorderLayout.NORTH);
+
+        currentWeatherView = new CurrentWeatherView();
+        mainPanel.add(currentWeatherView, BorderLayout.CENTER);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.openweathermap.org/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .build();
+
+        weatherService = retrofit.create(WeatherService.class);
+
+        updateLocation("Minneapolis");
 
         updateButton.addActionListener(e ->
         {
             String newCity = enterCityField.getText();
-
-            currentWeatherView.setFiveDayForecast(weatherService.getFiveDayForecast(newCity).blockingFirst());
-            mainPanel.add(currentWeatherView, BorderLayout.CENTER);
+            updateLocation(newCity);
         });
 
-        mainPanel.add(northPanel, BorderLayout.NORTH);
-        mainPanel.add(currentWeatherView, BorderLayout.CENTER);
         setContentPane(mainPanel);
+
+    }
+
+    //need to create method to get current location (ie ny or newCity) looking at
+    //then able to make action button listen to new location
+    public void updateLocation(String newCity) {
+        Disposable disposable = weatherService.getFiveDayForecast(newCity)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.newThread())
+                .subscribe(
+                        currentWeatherView ->
+                        {
+                            this.currentWeatherView.setFiveDayForecast(currentWeatherView);
+                        },
+                        Throwable::printStackTrace
+                );
 
     }
 
