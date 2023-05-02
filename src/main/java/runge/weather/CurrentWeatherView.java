@@ -9,7 +9,7 @@ public class CurrentWeatherView extends JComponent
 
 
     @Override
-    protected void paintComponent (Graphics g) {
+    protected void paintComponent(Graphics g) {
         super.paintComponents(g);
 
         int height = getHeight();
@@ -17,7 +17,7 @@ public class CurrentWeatherView extends JComponent
 
         List[] temp = fiveDayForecast.getList();
 
-        if(fiveDayForecast == null)
+        if (fiveDayForecast == null)
         {
             return;
         }
@@ -28,7 +28,7 @@ public class CurrentWeatherView extends JComponent
         }
     }
 
-    public void setFiveDayForecast (FiveDayForecast fiveDayForecast) {
+    public void setFiveDayForecast(FiveDayForecast fiveDayForecast) {
         this.fiveDayForecast = fiveDayForecast;
         repaint();
     }
