@@ -28,8 +28,8 @@ public class CurrentWeatherFrame extends JFrame
         JButton updateButton = new JButton("Update");
         northPanel.add(updateButton, BorderLayout.EAST);
 
-        JTextField enterCityField = new JTextField("Enter City" +
-                " (Currently showing Minneapolis)");
+        JTextField enterCityField = new JTextField("Enter City"
+                + " (Currently showing Minneapolis)");
         northPanel.add(enterCityField);
 
         mainPanel.add(northPanel, BorderLayout.NORTH);
