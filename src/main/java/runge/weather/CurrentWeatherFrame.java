@@ -11,8 +11,8 @@ import java.awt.*;
 
 public class CurrentWeatherFrame extends JFrame
 {
-    CurrentWeatherView currentWeatherView;
-    WeatherService weatherService;
+    private CurrentWeatherView currentWeatherView;
+    private WeatherService weatherService;
 
     public CurrentWeatherFrame() {
         setSize(780, 500);
@@ -28,7 +28,8 @@ public class CurrentWeatherFrame extends JFrame
         JButton updateButton = new JButton("Update");
         northPanel.add(updateButton, BorderLayout.EAST);
 
-        JTextField enterCityField = new JTextField("Enter City");
+        JTextField enterCityField = new JTextField("Enter City" +
+                " (Currently showing Minneapolis)");
         northPanel.add(enterCityField);
 
         mainPanel.add(northPanel, BorderLayout.NORTH);
@@ -63,9 +64,9 @@ public class CurrentWeatherFrame extends JFrame
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.newThread())
                 .subscribe(
-                        currentWeatherView ->
+                        currentWeather ->
                         {
-                            this.currentWeatherView.setFiveDayForecast(currentWeatherView);
+                            this.currentWeatherView.setFiveDayForecast(currentWeather);
                         },
                         Throwable::printStackTrace
                 );
