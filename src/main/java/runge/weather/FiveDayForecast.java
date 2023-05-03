@@ -9,7 +9,7 @@ public class FiveDayForecast
     private City city;
     private Long cnt;
     private String cod;
-    private java.util.List<runge.weather.List> list;
+    private List [] list;
     private Long message;
 
     public City getCity() {
@@ -36,11 +36,11 @@ public class FiveDayForecast
         this.cod = cod;
     }
 
-    public java.util.List<runge.weather.List> getList() {
+    public List [] getList() {
         return list;
     }
 
-    public void setList(java.util.List<runge.weather.List> list) {
+    public void setList(List [] list) {
         this.list = list;
     }
 

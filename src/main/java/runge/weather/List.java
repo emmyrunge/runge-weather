@@ -14,6 +14,7 @@ public class List
     private java.util.List<Weather> weather;
     private Wind wind;
 
+
     public Clouds getClouds() {
         return clouds;
     }
