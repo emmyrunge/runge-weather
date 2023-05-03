@@ -13,6 +13,7 @@ public class CurrentWeatherFrame extends JFrame
 {
     private CurrentWeatherView currentWeatherView;
     private WeatherService weatherService;
+    private ForecastWeatherController forecastWeatherController;
 
     public CurrentWeatherFrame() {
         setSize(780, 500);
@@ -45,32 +46,25 @@ public class CurrentWeatherFrame extends JFrame
 
         weatherService = retrofit.create(WeatherService.class);
 
-        updateLocation("Minneapolis");
+
+        forecastWeatherController = new ForecastWeatherController(currentWeatherView, weatherService);
+
+        forecastWeatherController.updateLocation("Minneapolis");
+
 
         updateButton.addActionListener(e ->
         {
-            String newCity = enterCityField.getText();
-            updateLocation(newCity);
+           forecastWeatherController.updateLocation(enterCityField.getText());
         });
 
         setContentPane(mainPanel);
+
+
+
 
     }
 
     //need to create method to get current location (ie ny or newCity) looking at
     //then able to make action button listen to new location
-    public void updateLocation(String newCity) {
-        Disposable disposable = weatherService.getFiveDayForecast(newCity)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.newThread())
-                .subscribe(
-                        currentWeather ->
-                        {
-                            this.currentWeatherView.setFiveDayForecast(currentWeather);
-                        },
-                        Throwable::printStackTrace
-                );
-
-    }
 
 }
