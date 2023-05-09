@@ -3,7 +3,10 @@ package runge.weather;
 public class MainWeather
 {
     public static void main(String[] args) {
-        CurrentWeatherFrame frame = new CurrentWeatherFrame();
+        ForecastWeatherComponent component = DaggerForecastWeatherComponent
+                .builder()
+                .build();
+        CurrentWeatherFrame frame = component.providesCurrentWeatherFrame();
         frame.setVisible(true);
     }
 }

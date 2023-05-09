@@ -1,11 +1,19 @@
 package runge.weather;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.swing.*;
 import java.awt.*;
 
+@Singleton
 public class CurrentWeatherView extends JComponent
 {
     FiveDayForecast fiveDayForecast;
+
+    @Inject
+    public CurrentWeatherView(){
+
+    }
 
 
     @Override

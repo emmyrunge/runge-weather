@@ -1,7 +1,6 @@
 package runge.weather;
 
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.internal.operators.observable.ObservableAll;
 import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.junit.jupiter.api.Test;
@@ -11,14 +10,14 @@ import static org.mockito.Mockito.*;
 public class ForecastWeatherControllerTest
 {
 
-    static{
+    static {
         //makes it so that our service returns right away
         RxJavaPlugins.setIoSchedulerHandler(scheduler -> Schedulers.trampoline());
         RxJavaPlugins.setNewThreadSchedulerHandler(scheduler -> Schedulers.trampoline());
     }
 
     @Test
-    void updateWeather(){
+    void updateWeather() {
         //given
         WeatherService weatherService = mock();
         CurrentWeatherView view = mock();

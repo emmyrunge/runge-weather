@@ -2,20 +2,19 @@ package runge.weather;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import javax.inject.Inject;
 
 public class ForecastWeatherController
 {
 
-    private CurrentWeatherView currentWeatherView;
+    private final CurrentWeatherView currentWeatherView;
     private final WeatherService weatherService;
 
+    @Inject
     public ForecastWeatherController(
             CurrentWeatherView currentWeatherView,
             WeatherService service
-
     ){
-
-
         this.currentWeatherView = currentWeatherView;
         this.weatherService = service;
     }
@@ -23,12 +22,9 @@ public class ForecastWeatherController
     public void updateLocation(String newCity) {
         Disposable disposable = weatherService.getFiveDayForecast(newCity)
                 .subscribeOn(Schedulers.io())
-                //.observeOn(Schedulers.newThread())
+                .observeOn(Schedulers.newThread())
                 .subscribe(
-                        currentWeather ->
-                        {
-                            this.currentWeatherView.setFiveDayForecast(currentWeather);
-                        },
+                        this.currentWeatherView::setFiveDayForecast,
                         Throwable::printStackTrace
                 );
 
