@@ -11,7 +11,7 @@ public class CurrentWeatherView extends JComponent
     FiveDayForecast fiveDayForecast;
 
     @Inject
-    public CurrentWeatherView(){
+    public CurrentWeatherView() {
 
     }
 
