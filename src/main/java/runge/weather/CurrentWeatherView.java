@@ -1,11 +1,19 @@
 package runge.weather;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.swing.*;
 import java.awt.*;
 
+@Singleton
 public class CurrentWeatherView extends JComponent
 {
     FiveDayForecast fiveDayForecast;
+
+    @Inject
+    public CurrentWeatherView() {
+
+    }
 
 
     @Override
@@ -15,12 +23,14 @@ public class CurrentWeatherView extends JComponent
         int height = getHeight();
         g.translate(0, height);
 
-        List[] temp = fiveDayForecast.getList();
 
         if (fiveDayForecast == null)
         {
             return;
         }
+
+        List[] temp = fiveDayForecast.getList();
+
         for (int i = 0; i < fiveDayForecast.getList().length - 1; i++)
         {
             g.drawLine(i * 20, (int) (-temp[i].getMain().getTemp()) * 5,
